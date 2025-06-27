@@ -17,7 +17,7 @@
   "contributes": {
     "configuration": [
       {
-        "title": "Openrouter翻译配置",
+        "title": "Openrouter translation configuration",
         "type": "Object",
         "properties": {
           "openrouterTranslate.apiKey": {
@@ -36,20 +36,24 @@
               "deepseek/deepseek-chat",
               "deepseek/deepseek-chat:free"
             ],
-            "description": "使用的AI模型名称 [官方模型列表](https://openrouter.ai/models?fmt=table)"
+            "description": "ai model name [official model list](https://openrouter.ai/models?fmt=table)"
           },
           "openrouterTranslate.api": {
             "type": "string",
             "default": "https://openrouter.ai/api/v1/chat/completions",
-            "description": "API服务地址"
+            "description": "API service address"
           },
           "openrouterTranslate.prompts.system": {
             "type": "string",
-            "description": "系统提示词, [参考](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
+            "description": "System prompt, [reference](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
           },
           "openrouterTranslate.prompts.translate": {
             "type": "string",
-            "description": "翻译提示词, [参考](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
+            "description": "Translation prompt, [reference](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
+          },
+          "openrouterTranslate.timeout": {
+            "type": "number",
+            "description": "Request timeout in milliseconds"
           }
         }
       }

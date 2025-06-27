@@ -36,7 +36,7 @@ export class Translater implements ITranslate {
     }
 
     const abort = new AbortController()
-    const id = setTimeout(() => abort.abort(new Error('Timeout')), timeout)
+    const id = setTimeout(() => abort.abort(new Error('Request timeout')), timeout)
 
     // https://openrouter.ai/request-builder
     const response: Response | Error = await fetch(api, {

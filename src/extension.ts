@@ -10,5 +10,4 @@ export function activate(_context: vscode.ExtensionContext) {
   }
 }
 
-// 当您的扩展被停用时调用此方法
 export function deactivate() {}
