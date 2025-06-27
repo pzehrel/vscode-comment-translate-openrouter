@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      comment-translate-manager:
+        specifier: ^0.0.5
+        version: 0.0.5(@types/vscode@1.101.0)
     devDependencies:
       '@antfu/eslint-config':
         specifier: ^4.16.1
@@ -540,6 +544,11 @@ packages:
   comment-parser@1.4.1:
     resolution: {integrity: sha512-buhp5kePrmda3vhc5B9t7pUQXAb2Tnd0qgpkIhPhkHXxJpiPJ11H0ZEU0oBpJ2QztSbzG/ZxMj/CHsYJqRHmyg==, tarball: https://registry.npmmirror.com/comment-parser/-/comment-parser-1.4.1.tgz}
     engines: {node: '>= 12.0.0'}
+
+  comment-translate-manager@0.0.5:
+    resolution: {integrity: sha512-3vSVYeAIiN9m+dCoEDdD8Sd58GhvnjWerE9QpgEySxQ3YNlof5ytPh4Bu9236kaaOJNdNCCd82VqVWffPQb/Mw==, tarball: https://registry.npmmirror.com/comment-translate-manager/-/comment-translate-manager-0.0.5.tgz}
+    peerDependencies:
+      '@types/vscode': ^1.63.0
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==, tarball: https://registry.npmmirror.com/concat-map/-/concat-map-0.0.1.tgz}
@@ -2308,6 +2317,10 @@ snapshots:
   color-name@1.1.4: {}
 
   comment-parser@1.4.1: {}
+
+  comment-translate-manager@0.0.5(@types/vscode@1.101.0):
+    dependencies:
+      '@types/vscode': 1.101.0
 
   concat-map@0.0.1: {}
 
