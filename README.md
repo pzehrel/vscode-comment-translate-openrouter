@@ -1,71 +1,53 @@
-# vscode-comment-translate-openrouter README
+# OpenRouter 智能注释翻译插件
 
-This is the README for your extension "vscode-comment-translate-openrouter". After writing up a brief description, we recommend including the following sections.
+本插件为「Comment Translate」提供OpenRouter的翻译源支持，需配合主插件使用。
 
-## Features
+## 功能特点
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+1. 提供智能的代码注释翻译能力
+2. 修改配置后自动检测API连接状态
+3. 允许自定义系统提示词和翻译提示词
 
-For example if there is an image subfolder under your extension project workspace:
+## 使用要求
 
-\!\[feature X\]\(images/feature-x.png\)
+需先安装 [Comment Translate 插件](https://marketplace.visualstudio.com/items?itemName=intellsmi.comment-translate)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## 使用指南
 
-## Requirements
+1. 安装后通过命令面板调用「切换翻译源」功能
+    ![切换翻译源](./image/change.png)
+2. 选择「DeepSeek Translate」并配置API参数
+    ![选择翻译源](./image/select.png)
+3. 在代码编辑器中直接使用翻译功能（快捷键：`Ctrl+Shift+T`）
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## 配置说明
 
-## Extension Settings
+本插件提供以下配置项：
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+| 配置项 | 默认值 | 说明 |
+| --- | --- | --- |
+| `openrouterTranslate.apiKey` | 必填 | OpenRouter API认证密钥, [获取API密钥](https://openrouter.ai/settings/keys) |
+| `openrouterTranslate.model` | `google/gemini-2.0-flash-lite-001` | 模型名称, [查看模型列表](https://openrouter.ai/models?fmt=table) |
+| `openrouterTranslate.api` | `https://openrouter.ai/api/v1/chat/completions` | API地址 |
+| `openrouterTranslate.prompts.system` |  | 系统提示词, 变量: `{{to}}` (目标语言), `{{content}}` (文本内容) |
+| `openrouterTranslate.prompts.translate` |  | 翻译提示词, 变量: `{{to}}` (目标语言), `{{content}}` (文本内容) |
+| `openrouterTranslate.timeout` | 600000 | 超时时间, 单位: 毫秒 |
 
-For example:
+## 配置示例
 
-This extension contributes the following settings:
+### 使用官方API（默认配置）
+```json
+{
+  "openrouterTranslate.apiKey": "您的API密钥"
+}
+```
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+> 请到 [OpenRouter](https://openrouter.ai/settings/keys) 中获取 API 密钥。
 
-## Known Issues
+## 翻译模型推荐
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1. gemini
+2. deepseek
+3. claude
 
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+> 仅为模型名称，请不要填入 `openrouterTranslate.model` 中。model 字段值请到 [OpenRouter models](https://openrouter.ai/models?fmt=table) 中查找。

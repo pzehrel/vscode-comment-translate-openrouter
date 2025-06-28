@@ -17,6 +17,7 @@
     "Other"
   ],
   "main": "./out/extension.js",
+  "icon": "image/logo.png",
   "engines": {
     "vscode": "^1.101.0",
     "node": "20"
@@ -38,12 +39,6 @@
           "openrouterTranslate.model": {
             "type": "string",
             "default": "google/gemini-2.0-flash-lite-001",
-            "enum": [
-              "google/gemini-2.0-flash-lite-001",
-              "google/gemini-2.0-flash-001",
-              "deepseek/deepseek-chat-v3-0324",
-              "deepseek/deepseek-chat"
-            ],
             "markdownDescription": "AI model to use for translation. [Browse all available models](https://openrouter.ai/models?fmt=table)"
           },
           "openrouterTranslate.api": {
