@@ -33,7 +33,7 @@
         "properties": {
           "openrouterTranslate.apiKey": {
             "type": "string",
-            "markdownDescription": "API Key [get key](https://openrouter.ai/settings/keys)"
+            "markdownDescription": "OpenRouter API key for authentication. [Get your API key here](https://openrouter.ai/settings/keys)"
           },
           "openrouterTranslate.model": {
             "type": "string",
@@ -44,24 +44,25 @@
               "deepseek/deepseek-chat-v3-0324",
               "deepseek/deepseek-chat"
             ],
-            "markdownDescription": "AI model name [model list](https://openrouter.ai/models?fmt=table)"
+            "markdownDescription": "AI model to use for translation. [Browse all available models](https://openrouter.ai/models?fmt=table)"
           },
           "openrouterTranslate.api": {
             "type": "string",
             "default": "https://openrouter.ai/api/v1/chat/completions",
-            "description": "API service address"
+            "description": "OpenRouter API endpoint URL. Usually no need to change this."
           },
           "openrouterTranslate.prompts.system": {
             "type": "string",
-            "markdownDescription": "System prompt, [see document](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
+            "markdownDescription": "System prompt for AI translation. Variables: `{{to}}` (target language), `{{content}}` (text to translate). [View variable documentation](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
           },
           "openrouterTranslate.prompts.translate": {
             "type": "string",
-            "markdownDescription": "Translation prompt, [see document](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
+            "markdownDescription": "User prompt for translation requests. Variables: `{{to}}` (target language), `{{content}}` (text to translate). [View variable documentation](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
           },
           "openrouterTranslate.timeout": {
             "type": "number",
-            "description": "Request timeout in milliseconds"
+            "default": 600000,
+            "description": "Request timeout in milliseconds (10 minutes by default)."
           }
         }
       }
@@ -69,7 +70,7 @@
     "translates": [
       {
         "translate": "openrouter",
-        "title": "openrouter translate"
+        "title": "OpenRouter Translate"
       }
     ]
   },

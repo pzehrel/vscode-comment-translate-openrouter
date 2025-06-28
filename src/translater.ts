@@ -10,16 +10,16 @@ interface Config {
     system: string
     translate: string
   }
-  timeout?: number
+  timeout: number
 }
 
 const CONFIG_NAME = 'openrouterTranslate'
 
 export class Translater implements ITranslate {
   async translate(content: string, options: ITranslateOptions): Promise<string> {
-    const { prompts, model, api, apiKey, timeout = 10 * 60 * 1000 } = this.config
+    const { prompts, model, api, apiKey, timeout } = this.config
     if (!apiKey) {
-      throw new Error('Please check the configuration of apiKey!')
+      throw new Error('Please check the configuration of "openrouterTranslate.apiKey"!')
     }
 
     const headers = new Headers({
@@ -61,7 +61,14 @@ export class Translater implements ITranslate {
   }
 
   link(_content: string, _options: ITranslateOptions): string {
-    return `--- what's this?`
+    // url is to long, so we don't use it
+
+    // const { model, prompts } = this.config
+    // const system = replacePrompt(prompts.system, content, options)
+    // const translate = replacePrompt(prompts.translate, content, options)
+    // const message = system + '\n' + translate
+    // return `https://openrouter.ai/chat?models=${model}&message=${encodeURIComponent(message)}`
+    return ''
   }
 
   isSupported() {
@@ -72,7 +79,7 @@ export class Translater implements ITranslate {
     return 5000
   }
 
-  private get config(): Config {
+  private getConfig(): Config {
     const configuration = workspace.getConfiguration(CONFIG_NAME)
     return {
       apiKey: configuration.get<string>('apiKey'),
@@ -80,14 +87,19 @@ export class Translater implements ITranslate {
       api: configuration.get<string>('api') || 'https://openrouter.ai/api/v1/chat/completions',
       prompts: {
         system: configuration.get<string>('prompts.system') || SYSTEM_PROMPT,
-        translate: configuration.get<string>('prompts.user') || TRANSLATE_PROMPT,
+        translate: configuration.get<string>('prompts.translate') || TRANSLATE_PROMPT,
       },
+      timeout: configuration.get<number>('timeout') || 600000,
     }
   }
 
+  private config: Config
+
   constructor() {
+    this.config = this.getConfig()
     workspace.onDidChangeConfiguration(async (eventNames) => {
       if (eventNames.affectsConfiguration(CONFIG_NAME)) {
+        this.config = this.getConfig()
         this.testConnection()
       }
     })
@@ -97,12 +109,13 @@ export class Translater implements ITranslate {
     const disposables: Disposable[] = []
 
     const progress = window.createStatusBarItem()
-    progress.text = '$(sync~spin) Testing connection...'
+    progress.text = '$(sync~spin) [OpenRouter] Testing connection...'
     progress.show()
     disposables.push(progress)
 
     const start = Date.now()
     const result: string | Error = await this.translate('hello', { to: 'zh-Hans' }).catch(err => err)
+    progress.hide()
     if (result instanceof Error) {
       window.showErrorMessage(`[OpenRouter] Connection failed: ${result.message}`)
     }
@@ -134,8 +147,4 @@ You are a professional {{to}} native translator who needs to fluently translate 
 4. For content that should not be translated (such as proper nouns, code, etc.), keep the original text.
 `
 
-const TRANSLATE_PROMPT = `
-Translate to {{to}}:
-
-{{content}}
-`
+const TRANSLATE_PROMPT = `{{content}}`
