@@ -19,12 +19,12 @@ export class Translater implements ITranslate {
   async translate(content: string, options: ITranslateOptions): Promise<string> {
     const { prompts, model, api, apiKey, timeout = 10 * 60 * 1000 } = this.config
     if (!apiKey) {
-      throw new Error('Please check the configuration of authKey!')
+      throw new Error('Please check the configuration of apiKey!')
     }
 
     const headers = new Headers({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.config.apiKey}`,
+      'Authorization': `Bearer ${apiKey}`,
     })
 
     const payload = {

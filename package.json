@@ -1,10 +1,18 @@
 {
   "publisher": "pzehrel",
-  "name": "vscode-comment-translate-openrouter",
-  "displayName": "vscode-comment-translate-openrouter",
+  "name": "openrouter-translate",
+  "displayName": "openrouter-translate",
   "version": "0.0.1",
   "packageManager": "pnpm@10.12.4",
   "description": "Openrouter translation source for comment-translate",
+  "homepage": "https://github.com/pzehrel/vscode-comment-translate-openrouter#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pzehrel/vscode-comment-translate-openrouter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pzehrel/vscode-comment-translate-openrouter/issues"
+  },
   "categories": [
     "Other"
   ],
@@ -13,6 +21,9 @@
     "vscode": "^1.101.0",
     "node": "20"
   },
+  "extensionDependencies": [
+    "intellsmi.comment-translate"
+  ],
   "activationEvents": [],
   "contributes": {
     "configuration": [
@@ -22,21 +33,18 @@
         "properties": {
           "openrouterTranslate.apiKey": {
             "type": "string",
-            "markdownDescription": "API Key [官方获取地址](https://openrouter.ai/settings/keys)"
+            "markdownDescription": "API Key [get key](https://openrouter.ai/settings/keys)"
           },
           "openrouterTranslate.model": {
             "type": "string",
-            "default": "google/gemini-2.0-flash-exp:free",
+            "default": "google/gemini-2.0-flash-lite-001",
             "enum": [
-              "google/gemini-2.0-flash-exp:free",
               "google/gemini-2.0-flash-lite-001",
               "google/gemini-2.0-flash-001",
-              "deepseek/deepseek-chat-v3-0324:free",
               "deepseek/deepseek-chat-v3-0324",
-              "deepseek/deepseek-chat",
-              "deepseek/deepseek-chat:free"
+              "deepseek/deepseek-chat"
             ],
-            "description": "ai model name [official model list](https://openrouter.ai/models?fmt=table)"
+            "markdownDescription": "AI model name [model list](https://openrouter.ai/models?fmt=table)"
           },
           "openrouterTranslate.api": {
             "type": "string",
@@ -45,11 +53,11 @@
           },
           "openrouterTranslate.prompts.system": {
             "type": "string",
-            "description": "System prompt, [reference](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
+            "markdownDescription": "System prompt, [see document](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
           },
           "openrouterTranslate.prompts.translate": {
             "type": "string",
-            "description": "Translation prompt, [reference](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
+            "markdownDescription": "Translation prompt, [see document](https://github.com/pzehrel/vscode-comment-translate-openrouter)"
           },
           "openrouterTranslate.timeout": {
             "type": "number",
