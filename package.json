@@ -2,7 +2,7 @@
   "publisher": "pzehrel",
   "name": "openrouter-translate",
   "displayName": "openrouter-translate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@10.12.4",
   "description": "Openrouter translation source for comment-translate",
   "homepage": "https://github.com/pzehrel/vscode-comment-translate-openrouter#readme",
