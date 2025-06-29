@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install ovsx
+        run: pnpm install -g ovsx
+
       - name: Build extension
         run: pnpm compile
 
@@ -49,3 +52,8 @@ jobs:
         run: pnpm vsce publish --no-dependencies
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish to Open VSX Registry
+        run: ovsx publish *.vsix
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
