@@ -28,24 +28,24 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install ovsx
+        run: pnpm install -g ovsx
+
+      - name: Remove extensionDependencies for Open VSX
+        run: |
+          node -e "
+          const pkg = require('./package.json');
+          delete pkg.extensionDependencies;
+          require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+          "
+
       - name: Build extension
         run: pnpm compile
 
       - name: Package extension
         run: pnpm package
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            *.vsix
-          generate_release_notes: true
-          draft: false
-          prerelease: false
+      - name: Publish to Open VSX Registry
+        run: ovsx publish *.vsix
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish to VS Code Marketplace
-        run: pnpm vsce publish --no-dependencies
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
